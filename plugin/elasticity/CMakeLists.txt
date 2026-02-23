@@ -41,3 +41,9 @@ target_link_options(
   ${MUJOCO_MACOS_LINK_OPTIONS}
   ${EXTRA_LINK_OPTIONS}
 )
+
+# Debug diagnostic for cable plugin
+add_executable(cable_debug cable_debug.cc)
+target_include_directories(cable_debug PRIVATE ${MUJOCO_ELASTICITY_INCLUDE})
+target_link_libraries(cable_debug PRIVATE mujoco)
+set_target_properties(cable_debug PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
