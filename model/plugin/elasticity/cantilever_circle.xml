@@ -1,0 +1,27 @@
+<mujoco>
+  <option gravity="0 0 0"/>
+  <extension>
+    <plugin plugin="mujoco.elasticity.cable"/>
+  </extension>
+  <worldbody>
+    <geom type="plane" size="0 0 1" quat="1 0 0 0"/>
+    <site name="reference" pos="0 0 0"/>
+    <composite type="cable" curve="s" count="41 1 1" size="1" offset="0 0 1" initial="none">
+      <plugin plugin="mujoco.elasticity.cable">
+        <config key="twist" value="1e6"/>
+        <config key="bend" value="1e9"/>
+      </plugin>
+      <joint kind="main" damping="2"/>
+      <geom type="capsule" size=".005" density="1"/>
+    </composite>
+  </worldbody>
+  <contact>
+    <exclude body1="B_first" body2="B_last"/>
+  </contact>
+  <sensor>
+    <framepos objtype="site" objname="S_last"/>
+  </sensor>
+  <actuator>
+    <motor site="S_last" gear="0 0 0 0 1 0" ctrllimited="true" ctrlrange="0 4"/>
+  </actuator>
+</mujoco>
